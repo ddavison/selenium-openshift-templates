@@ -7,11 +7,52 @@ metadata:
     iconClass: "icon-selenium"
     tags: "selenium,node,chrome"
 objects:
-- apiVersion: v1
-  kind: ReplicationController
+- kind: BuildConfig
+  apiVersion: v1
   metadata:
     name: selenium-node-chrome
   spec:
+    triggers:
+    - type: ConfigChange
+      configChange: {}
+    source:
+      contextDir: selenium-node-chrome
+      type: Git
+      git:
+        uri: https://github.com/jr00n/selenium-os
+        ref: master
+    strategy:
+      type: Docker
+      DockerStrategy: {}
+    output:
+      to:
+        kind: ImageStreamTag
+        name: selenium-node-chrome:latest
+- kind: ImageStream
+  apiVersion: v1
+  metadata:
+    name: selenium-node-chrome
+  spec:
+    dockerImageRepository: ''
+    tags:
+    - name: latest
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: selenium-node-chrome
+  spec:
+    strategy:
+      type: Recreate
+    triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+        - master
+        from:
+          kind: ImageStreamTag
+          name: selenium-node-chrome:latest
+    - type: ConfigChange
     replicas: 1
     selector:
       browser: chrome
@@ -33,7 +74,7 @@ objects:
             value: ${HUB_PORT_4444_TCP_PORT}
           - name: REMOTE_HOST
             value: ${REMOTE_HOST}
-          image: selenium/node-chrome
+          image: selenium-node-chrome
           name: master
           ports:
           - containerPort: 4444
@@ -60,16 +101,16 @@ objects:
 parameters:
   - name: JAVA_OPTS
     description: Options for the Java command
-    value: "-Xmx512m"
+    value: "-Xmx512m -Dselenium.LOGGER.level=WARNING"
   - name: SE_OPTS
     description: Options for the Node
     value: ""
   - name: HUB_PORT_4444_TCP_ADDR
     description: The Hub to connect to
-    value: ""
+    value: "selenium-hub"
   - name: HUB_PORT_4444_TCP_PORT
     description: The Hub port to connect to
-    value: ""
+    value: "4444"
   - name: REMOTE_HOST
     description: The remote host
     value: ""
