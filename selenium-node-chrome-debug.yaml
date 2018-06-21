@@ -96,7 +96,7 @@ objects:
       port: 5555
       targetPort: 5555
       protocol: TCP
-    - name: node-port
+    - name: node-port-vnc
       port: 5900
       targetPort: 5900
       protocol: TCP
