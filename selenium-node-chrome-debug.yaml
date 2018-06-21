@@ -79,8 +79,6 @@ objects:
           ports:
           - containerPort: 4444
             protocol: TCP
-          - containerPort: 5555
-            protocol: TCP
           - containerPort: 5900
             protocol: TCP
 - apiVersion: v1
@@ -93,10 +91,6 @@ objects:
     type: ClusterIP
     ports:
     - name: node-port
-      port: 5555
-      targetPort: 5555
-      protocol: TCP
-    - name: node-port-vnc
       port: 5900
       targetPort: 5900
       protocol: TCP
