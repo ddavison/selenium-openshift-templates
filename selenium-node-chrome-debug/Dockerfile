@@ -1,4 +1,4 @@
-FROM selenium/node-chrome-debug:3.6
+FROM selenium/node-chrome-debug
 
 ENV HOME=/home/seluser
 
@@ -12,3 +12,5 @@ RUN chown -R 1001:0 /opt/selenium && \
 
 USER 1001
 WORKDIR $HOME
+
+EXPOSE 5900

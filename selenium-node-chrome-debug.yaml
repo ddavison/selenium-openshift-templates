@@ -5,7 +5,7 @@ metadata:
   annotations:
     description: "Selenium Node with Google Chrome browser"
     iconClass: "icon-selenium"
-    tags: "selenium,node,chrome"
+    tags: "selenium,node,chrome,debug"
 objects:
 - kind: BuildConfig
   apiVersion: v1
