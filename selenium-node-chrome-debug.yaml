@@ -10,7 +10,7 @@ objects:
 - kind: BuildConfig
   apiVersion: v1
   metadata:
-    name: selenium-node-chrome
+    name: selenium-node-chrome-debug
   spec:
     triggers:
     - type: ConfigChange
