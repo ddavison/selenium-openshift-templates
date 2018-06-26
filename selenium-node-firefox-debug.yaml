@@ -19,7 +19,7 @@ objects:
       contextDir: selenium-node-firefox-debug
       type: Git
       git:
-        uri: https://github.com/jr00n/selenium-os
+        uri: https://github.com/ddavison/selenium-openshift-templates
         ref: master
     strategy:
       type: Docker
