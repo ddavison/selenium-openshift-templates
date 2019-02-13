@@ -37,7 +37,7 @@ objects:
             value: ${HUB_PORT_4444_TCP_PORT}
           - name: REMOTE_HOST
             value: ${REMOTE_HOST}
-          image: qgervacio/selenium-node-chrome-debug:latest
+          image: ${IMAGE}
           name: master
           ports:
           - containerPort: 4444
@@ -87,3 +87,5 @@ parameters:
     description: Unique ID assigned to the node
     generate: expression
     from: '[a-z]{4}'
+  - name: IMAGE
+    description: Target image

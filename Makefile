@@ -66,7 +66,7 @@ deploy:
 	@oc create --filename=${TEMPLATES} -n "${OCPNAM}" --server="${OCPURL}" --token="${OCPTKN}" --insecure-skip-tls-verify="true"
 	
 	@oc new-app -f selenium-hub.yaml -p HUB_ROUTE=${SELURL} -n "${OCPNAM}" --server="${OCPURL}" --token="${OCPTKN}" --insecure-skip-tls-verify="true"
-	@oc new-app -f selenium-node-chrome.yaml -n "${OCPNAM}" --server="${OCPURL}" --token="${OCPTKN}" --insecure-skip-tls-verify="true"
-	@oc new-app -f selenium-node-chrome-debug.yaml -n "${OCPNAM}" --server="${OCPURL}" --token="${OCPTKN}" --insecure-skip-tls-verify="true"
-	@oc new-app -f selenium-node-firefox.yaml -n "${OCPNAM}" --server="${OCPURL}" --token="${OCPTKN}" --insecure-skip-tls-verify="true"
-	@oc new-app -f selenium-node-firefox-debug.yaml -n "${OCPNAM}" --server="${OCPURL}" --token="${OCPTKN}" --insecure-skip-tls-verify="true"
+	@oc new-app -f selenium-node-chrome.yaml -p IMAGE=${CHROME}:${CANDID} -n "${OCPNAM}" --server="${OCPURL}" --token="${OCPTKN}" --insecure-skip-tls-verify="true"
+	@oc new-app -f selenium-node-chrome-debug.yaml -p IMAGE=${CHROME}-debug:${CANDID} -n "${OCPNAM}" --server="${OCPURL}" --token="${OCPTKN}" --insecure-skip-tls-verify="true"
+	@oc new-app -f selenium-node-firefox.yaml -p IMAGE=${FIREFO}:${CANDID} -n "${OCPNAM}" --server="${OCPURL}" --token="${OCPTKN}" --insecure-skip-tls-verify="true"
+	@oc new-app -f selenium-node-firefox-debug.yaml -p IMAGE=${FIREFO}-debug:${CANDID} -n "${OCPNAM}" --server="${OCPURL}" --token="${OCPTKN}" --insecure-skip-tls-verify="true"
