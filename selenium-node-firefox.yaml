@@ -37,7 +37,7 @@ objects:
             value: ${HUB_PORT_4444_TCP_PORT}
           - name: REMOTE_HOST
             value: ${REMOTE_HOST}
-          image: qgervacio/node-firefox-os:latest
+          image: qgervacio/selenium-node-firefox:latest
           name: master
           ports:
           - containerPort: 4444
