@@ -1,10 +1,14 @@
 .PHONY: all build test push delete deploy
-CHROME=qgervacio/node-chrome
-FIREFO=qgervacio/node-firefox
+CHROME=qgervacio/selenium-node-chrome
+FIREFO=qgervacio/selenium-node-firefox
 
 LATEST=latest
 CANDID=1.0.0
 
+# tested in:
+# minishift v1.30.0+186b034
+# oc v3.11.0+0cbc58b
+# kubernetes v1.11.0+d4cacc0
 OCPNAM=selenium
 OCPURL=https://192.168.99.100:8443
 OCPTKN=Wzd7HQk9vub4GMgVVfHeGiSxTp9XSYcbzyH3ZStMsQY
