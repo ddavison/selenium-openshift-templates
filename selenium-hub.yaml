@@ -16,6 +16,8 @@ objects:
     labels:
       app: selenium
   spec:
+    selector:
+      type: selenium-hub
     type: ClusterIP
     ports:
     - name: web
@@ -35,12 +37,12 @@ objects:
   spec:
     replicas: 1
     selector:
-      app: selenium
+      type: selenium-hub
     template:
       metadata:
-        name: selenium-hub
         labels:
-          app: selenium
+          type: selenium-hub
+        name: selenium-hub
       spec:
         containers:
         - env:
@@ -115,3 +117,5 @@ parameters:
   - name: GRID_UNREGISTER_IF_STILL_DOWN_AFTER
     description: Time to wait before unregistering nodes
     value: "500"
+labels:
+  selenium-hub: master
