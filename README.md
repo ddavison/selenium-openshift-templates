@@ -38,11 +38,13 @@ $ vncviewer 127.0.0.1:5900
 ```
 NB: The default password to access to VNC is `secret`. You can change it by editing the chrome debug Dockerfile following [this](https://github.com/SeleniumHQ/docker-selenium/tree/master/NodeChromeDebug#how-to-use-this-image).
 
-Test/Build
+Test/Build/Deploy
 ===
 
+Provide your custom values accordingly in `Makefile`
+
 ```
-make test build
+make test build delete deploy
 ```
 
 Example
