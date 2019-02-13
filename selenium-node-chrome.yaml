@@ -2,65 +2,28 @@ apiVersion: v1
 kind: Template
 metadata:
   name: selenium-node-chrome
+  labels:
+    app: selenium
   annotations:
     description: "Selenium Node with Google Chrome browser"
-    iconClass: "icon-selenium"
+    iconClass: "icon-other-linux"
     tags: "selenium,node,chrome"
 objects:
-- kind: BuildConfig
-  apiVersion: v1
-  metadata:
-    name: selenium-node-chrome
-  spec:
-    triggers:
-    - type: ConfigChange
-      configChange: {}
-    source:
-      contextDir: selenium-node-chrome
-      type: Git
-      git:
-        uri: https://github.com/ddavison/selenium-openshift-templates
-        ref: master
-    strategy:
-      type: Docker
-      DockerStrategy: {}
-    output:
-      to:
-        kind: ImageStreamTag
-        name: selenium-node-chrome:latest
-- kind: ImageStream
-  apiVersion: v1
-  metadata:
-    name: selenium-node-chrome
-  spec:
-    dockerImageRepository: ''
-    tags:
-    - name: latest
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
     name: selenium-node-chrome
+    labels:
+      app: selenium
   spec:
-    strategy:
-      type: Recreate
-    triggers:
-    - type: ImageChange
-      imageChangeParams:
-        automatic: true
-        containerNames:
-        - master
-        from:
-          kind: ImageStreamTag
-          name: selenium-node-chrome:latest
-    - type: ConfigChange
     replicas: 1
     selector:
-      browser: chrome
+      app: selenium
     template:
       metadata:
-        name: selenium-node-chrome-master
+        name: selenium-node-chrome
         labels:
-          browser: chrome
+          app: selenium
       spec:
         containers:
         - env:
@@ -74,7 +37,7 @@ objects:
             value: ${HUB_PORT_4444_TCP_PORT}
           - name: REMOTE_HOST
             value: ${REMOTE_HOST}
-          image: selenium-node-chrome
+          image: qgervacio/node-chrome-os:latest
           name: master
           ports:
           - containerPort: 4444
@@ -85,9 +48,9 @@ objects:
   kind: Service
   metadata:
     name: selenium-node-chrome
+    labels:
+      app: selenium
   spec:
-    selector:
-      browser: chrome
     type: ClusterIP
     ports:
     - name: node-port
