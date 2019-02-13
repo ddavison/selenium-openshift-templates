@@ -2,25 +2,25 @@ version: "3"
 
 services:
   selenium-node-chrome:
-    image: ${CHROME}-os:${TAG}
+    image: ${CHROME}:${TAG}
     build:
       context: ./selenium-node-chrome
       dockerfile: Dockerfile
 
   selenium-node-chrome-debug:
-    image: ${CHROME}-debug-os:${TAG}
+    image: ${CHROME}-debug:${TAG}
     build:
       context: ./selenium-node-chrome-debug
       dockerfile: Dockerfile
 
   selenium-node-firefox:
-    image: ${FIREFO}-os:${TAG}
+    image: ${FIREFO}:${TAG}
     build:
       context: ./selenium-node-firefox
       dockerfile: Dockerfile
 
   selenium-node-firefox-debug:
-    image: ${FIREFO}-debug-os:${TAG}
+    image: ${FIREFO}-debug:${TAG}
     build:
       context: ./selenium-node-firefox-debug
       dockerfile: Dockerfile
