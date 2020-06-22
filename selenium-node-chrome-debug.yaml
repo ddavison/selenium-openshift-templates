@@ -19,8 +19,8 @@ objects:
       contextDir: selenium-node-chrome-debug
       type: Git
       git:
-        uri: https://github.com/ddavison/selenium-openshift-templates
-        ref: master
+        uri: https://github.com/genomicsengland/selenium-openshift-templates
+        ref: feature/update-images
     strategy:
       type: Docker
       DockerStrategy: {}
