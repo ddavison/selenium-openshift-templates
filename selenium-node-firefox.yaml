@@ -3,7 +3,7 @@ kind: Template
 metadata:
   name: selenium-node-firefox
   annotations:
-    description: "Selenium Node with Google firefox browser"
+    description: "Selenium Node with Firefox browser"
     iconClass: "icon-selenium"
     tags: "selenium,node,firefox"
 objects:
