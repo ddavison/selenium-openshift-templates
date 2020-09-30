@@ -24,6 +24,14 @@ objects:
       port: 5555
       targetPort: 5555
       protocol: TCP
+    - name: publish
+      port: 4442
+      targetPort: 4442
+      protocol: TCP
+    - name: subscribe
+      port: 4443
+      targetPort: 4443
+      protocol: TCP
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
@@ -60,7 +68,7 @@ objects:
             value: ${GRID_MAX_SESSION}
           - name: GRID_UNREGISTER_IF_STILL_DOWN_AFTER
             value: ${GRID_UNREGISTER_IF_STILL_DOWN_AFTER}
-          image: selenium/hub
+          image: selenium/hub:4.0.0
           name: master
           ports:
           - containerPort: 4444
