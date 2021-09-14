@@ -7,35 +7,6 @@ metadata:
     iconClass: "icon-selenium"
     tags: "selenium,node,chrome"
 objects:
-- kind: BuildConfig
-  apiVersion: v1
-  metadata:
-    name: selenium-node-chrome
-  spec:
-    triggers:
-    - type: ConfigChange
-      configChange: {}
-    source:
-      contextDir: selenium-node-chrome
-      type: Git
-      git:
-        uri: https://github.com/ddavison/selenium-openshift-templates
-        ref: master
-    strategy:
-      type: Docker
-      DockerStrategy: {}
-    output:
-      to:
-        kind: ImageStreamTag
-        name: selenium-node-chrome:latest
-- kind: ImageStream
-  apiVersion: v1
-  metadata:
-    name: selenium-node-chrome
-  spec:
-    dockerImageRepository: ''
-    tags:
-    - name: latest
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
@@ -43,16 +14,6 @@ objects:
   spec:
     strategy:
       type: Recreate
-    triggers:
-    - type: ImageChange
-      imageChangeParams:
-        automatic: true
-        containerNames:
-        - master
-        from:
-          kind: ImageStreamTag
-          name: selenium-node-chrome:latest
-    - type: ConfigChange
     replicas: 1
     selector:
       browser: chrome
@@ -74,7 +35,13 @@ objects:
             value: ${HUB_PORT_4444_TCP_PORT}
           - name: REMOTE_HOST
             value: ${REMOTE_HOST}
-          image: selenium-node-chrome
+          - name: SE_EVENT_BUS_HOST
+            value: ${SE_EVENT_BUS_HOST}
+          - name: SE_EVENT_BUS_PUBLISH_PORT
+            value: ${SE_EVENT_BUS_PUBLISH_PORT}
+          - name: SE_EVENT_BUS_SUBSCRIBE_PORT
+            value: ${SE_EVENT_BUS_SUBSCRIBE_PORT}
+          image: selenium/node-chrome:4.0.0
           name: master
           ports:
           - containerPort: 4444
@@ -118,3 +85,13 @@ parameters:
     description: Unique ID assigned to the node
     generate: expression
     from: '[a-z]{4}'
+  - name: SE_EVENT_BUS_HOST
+    description: The selenium event hub host
+    value: "selenium-hub"
+  - name: SE_EVENT_BUS_PUBLISH_PORT
+    description: The publish port
+    value: "4442"
+  - name: SE_EVENT_BUS_SUBSCRIBE_PORT
+    description: The subscribe port
+    value: "4443"
+
